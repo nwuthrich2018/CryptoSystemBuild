@@ -1,0 +1,22 @@
+sage: def elGamalSign(p, a, k, m, A):
+....:     k = mod(k, p-1)
+....:     a = mod(a,p)
+....:     if gcd(k, p-1) == 1:
+....:       r = a^k
+....:       s = (m-A*r.lift())/k
+....:     else:
+....:       return "ERROR"  
+....:     return (m,r,s)
+
+
+sage: def elGamalVerify(a,B,m,r,s):
+....:     if a^m == B^r*r^s:
+....:         return "Valid signature"
+....:     else:
+....:         return "Invalid signature"
+
+sage: def keyGen(g,a,b,p):
+....:     k = mod(g^ab,p)
+....:     return k
+....: 
+
