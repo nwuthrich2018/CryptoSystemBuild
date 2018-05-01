@@ -20,7 +20,7 @@ Let B < p be an arbitrary agreed upon integer.
      else:
          return "Invalid signature"
 
-# Let p be an arbitrary small prime, g is an arbitrary primitive root of p, a and b are arbitrary integers,
+# Let p be an arbitrary small prime, g is the arbitrary primitive root of p, a and b are arbitrary integers,
 one picked by each group. Then the Diffie Hellman key is:
  def diffHellKeyGen(g,a,b,p):
      k = mod(g^ab,p)
