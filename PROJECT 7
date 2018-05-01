@@ -1,22 +1,29 @@
-sage: def elGamalSign(p, a, k, m, A):
-....:     k = mod(k, p-1)
-....:     a = mod(a,p)
-....:     if gcd(k, p-1) == 1:
-....:       r = a^k
-....:       s = (m-A*r.lift())/k
-....:     else:
-....:       return "ERROR"  
-....:     return (m,r,s)
+#Let integer g be an agreed upon primitive root of prime p. Let A be an arbitrary integer < p. 
+Let k < p-1 such that gcd(k, p-1) = 1.
+m is the message. Then the following function signs the message and returns a triple to be verified.
+ def elGamalSign(p, g, k, m, A):
+     k = mod(k, p-1)
+     g = mod(g,p)
+     if gcd(k, p-1) == 1:
+       r = g^k
+       s = (m-A*r.lift())/k
+     else:
+       return "ERROR"  
+     return (m,r,s)
 
+# Let g be the agreed upon primitive root of p (must be called: mod(g,p)).
+Let B < p be an arbitrary agreed upon integer.
+(m,r,s) is the triple to be verfied.
+ def elGamalVerify(g,B,m,r,s):
+     if g^m == B^r*r^s:
+         return "Valid signature"
+     else:
+         return "Invalid signature"
 
-sage: def elGamalVerify(a,B,m,r,s):
-....:     if a^m == B^r*r^s:
-....:         return "Valid signature"
-....:     else:
-....:         return "Invalid signature"
-
-sage: def keyGen(g,a,b,p):
-....:     k = mod(g^ab,p)
-....:     return k
-....: 
+# Let p be an arbitrary small prime, g is an arbitrary primitive root of p, a and b are arbitrary integers,
+one picked by each group. Then the Diffie Hellman key is:
+ def diffHellKeyGen(g,a,b,p):
+     k = mod(g^ab,p)
+     return k
+ 
 
